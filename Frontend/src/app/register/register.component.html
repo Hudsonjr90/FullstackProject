@@ -1,0 +1,11 @@
+<!-- register.component.html -->
+<div>
+    <label>Usuário:</label>
+    <input type="text" placeholder="Usuário" [formControl]="registerForm.get('username')" />
+  
+    <label>Senha:</label>
+    <input type="password" placeholder="Senha" [formControl]="registerForm.get('password')" />
+  
+    <button (click)="register()">Registrar</button>
+  </div>
+  

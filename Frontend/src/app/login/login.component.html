@@ -1,0 +1,11 @@
+<!-- login.component.html -->
+<div>
+    <label>Usuário:</label>
+    <input type="text" placeholder="Usuário" [formControl]="loginForm.get('username')" />
+  
+    <label>Senha:</label>
+    <input type="password" placeholder="Senha" [formControl]="loginForm.get('password')" />
+  
+    <button (click)="login()">Login</button>
+  </div>
+  

@@ -1,3 +1,3 @@
 # FullstackProject
 
-Projeto teste fullstack, com node.js no backend, PostrgreSQL como banco de dados e angular no frontend.
+Projeto teste fullstack, com Node.js no backend, PostrgreSQL como banco de dados e Angular no frontend.
