@@ -1,6 +1,5 @@
 // app.module.ts
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -9,6 +8,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
+
 
 
 @NgModule({
@@ -17,11 +20,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent
   ],
+  providers: [
+    AuthService,
+    HttpClient,
+    HttpClientModule 
+  ],
   imports: [
     BrowserModule,
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    HttpClient,
     RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent]

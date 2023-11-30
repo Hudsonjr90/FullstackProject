@@ -9,12 +9,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
+  registerForm!: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 

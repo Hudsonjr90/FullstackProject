@@ -1,11 +1,12 @@
-<!-- register.component.html -->
 <div>
-    <label>Usuário:</label>
-    <input type="text" placeholder="Usuário" [formControl]="registerForm.get('username')" />
-  
-    <label>Senha:</label>
-    <input type="password" placeholder="Senha" [formControl]="registerForm.get('password')" />
-  
-    <button (click)="register()">Registrar</button>
-  </div>
-  
+  <label for="username">Usuário:</label>
+  <input type="text" id="username" placeholder="Usuário" formControlName="username" />
+
+  <label for="password">Senha:</label>
+  <input type="password" id="password" placeholder="Senha" formControlName="password" />
+
+  <button (click)="register()">Registrar</button>
+</div>
+
+
+
