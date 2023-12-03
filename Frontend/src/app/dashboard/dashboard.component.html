@@ -1,0 +1,221 @@
+<div class="mainContainer">
+  <div ng-controller="TodoCtrl" class="toDoContainer">
+    <div class="createTask">
+      <form
+        action=""
+        method="POST"
+        [formGroup]="bForm"
+        (ngSubmit)="onSubmit(bForm.value)"
+        novalidateng-submit="addTodo()"
+        class="form-inline createForm"
+      >
+        <!--TITLE START-->
+        <div class="form-group">
+          <input
+            class="form-control"
+            size="30"
+            placeholder="New Title"
+            type="text"
+            id="title"
+            name="title"
+            formControlName="title"
+          />
+        </div>
+        <!--TITLE END-->
+        <!--SUMMARY START-->
+        <div class="form-group">
+          <input
+            class="form-control"
+            size="30"
+            placeholder="Description"
+            type="text"
+            id="description"
+            name="description"
+            formControlName="description"
+          />
+        </div>
+        <!--SUMMARY END-->
+        <!--PRIORITY START-->
+        <div class="form-group">
+          <!-- <select
+            class="form-control priority"
+            name="tag"
+            ng-model="priority"
+            ng-click="endEditMode()"
+          >
+            <option value="3">High</option>
+            <option value="2">Medium</option>
+            <option value="1">Low</option>
+          </select> -->
+          <!-- <select class="form-select">
+            <option value="1">High</option>
+            <option value="2">Medium</option>
+            <option value="3">Low</option>
+          </select> -->
+          <!-- <select ng-Model="selectedTag">
+            <option *ngFor="let selectedTag of tags">{{ selectedTag }}</option>
+          </select> -->
+          <select
+            formControlName="tags"
+            (change)="selectCategory($event)"
+            class="form-select"
+          >
+            <option *ngFor="let selectedTag of tags">
+              {{ selectedTag }}
+            </option>
+          </select>
+        </div>
+        <!--PRIORITY END-->
+        <!--DUE DATE START-->
+        <div class="form-group">
+          <input
+            class="form-control datepicker"
+            type="date"
+            name="dueDate"
+            placeholder="yyyy-MM-dd"
+            min="2022-04-08"
+            max="2029-12-31"
+            formControlName="dueDate"
+            required
+          />
+        </div>
+        <!--DUE DATE END-->
+        <!--SUBMIT BTN-->
+        <div class="form-group">
+          <button class="add-btn btn-secondary" type="submit">add</button>
+        </div>
+        <!--SUBMIT BTN-->
+      </form>
+      <span class="tasksLeft">Items: {{ items?.length }} </span>
+    </div>
+    <!--HEADER START-->
+    <div style="overflow: scroll; height: 300px">
+      <table id="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th [appSort]="items" data-order="desc" data-name="id">
+              ID
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th [appSort]="items" data-order="desc" data-name="title">
+              Title
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th [appSort]="items" data-order="desc" data-name="description">
+              Description
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th [appSort]="items" data-order="desc" data-name="tag">
+              Tag
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th [appSort]="items" data-order="desc" data-name="dueDate">
+              Due Date
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td><input type="checkbox" /></td>
+            <td>
+              <span>{{ item.id }}</span>
+            </td>
+            <td>
+              <span>{{ item.title }}</span>
+            </td>
+            <td>
+              <span>{{ item.description }}</span>
+            </td>
+            <td>
+              <span>{{ item.tag }}</span>
+            </td>
+            <td>
+              <span>{{ item.dueDate | date: "shortDate" }}</span>
+            </td>
+
+            <td>
+              <button
+                (click)="deleteItem(item.id)"
+                class="btn btn-sm btn-danger"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- TODO END-->
+  </div>
+  <div class="logout">
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>

@@ -1,38 +1,31 @@
-// app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { routes } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-
-
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { SortDirective } from './directive/sort.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
-  ],
-  providers: [
-    AuthService,
-    HttpClient,
-    HttpClientModule 
+    RegisterComponent,
+    DashboardComponent,
+    SortDirective
   ],
   imports: [
     BrowserModule,
-    CommonModule,
+    AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    HttpClient,
-    RouterModule.forRoot(routes)
+    HttpClientModule
   ],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
